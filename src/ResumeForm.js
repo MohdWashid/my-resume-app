@@ -212,7 +212,7 @@ const About = ({ theme }) => {
                         <div className="w-full lg:w-1/10 mb-8 lg:mb-0 text-center lg:text-left">
                             <div className="relative w-48 h-48 mx-auto lg:mx-0 lg:w-64 lg:h-64 rounded-full overflow-hidden border-4 border-white shadow-lg mb-6">
                                 <img
-                                    src="/images/Passport.jpg"
+                                   src={process.env.PUBLIC_URL +  "/images/Passport.jpg"}
                                     alt="Mohd Washid"
                                     className="w-full h-full object-cover"
                                 />
@@ -720,13 +720,13 @@ const PortfolioContent = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const projectsResponse = await axios.get('/project.json');
+                const projectsResponse = await axios.get(`${process.env.PUBLIC_URL}/project.json`);
                 setProjects(projectsResponse.data);
 
-                const blogResponse = await axios.get('/blog.json');
+                const blogResponse = await axios.get(`${process.env.PUBLIC_URL}/blog.json`);
                 setBlogPosts(blogResponse.data);
 
-                const experiencesResponse = await axios.get('/experince.json');
+                const experiencesResponse = await axios.get(`${process.env.PUBLIC_URL}/experince.json`);
                 setExperiences(experiencesResponse.data);
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -792,7 +792,7 @@ const PortfolioContent = () => {
                                 transition={{ duration: 1.5 }}
                             />
                             <motion.img
-                                src="/images/Passport.jpg" // Replace with your actual image path
+                                src={process.env.PUBLIC_URL + "/images/Passport.jpg"} // Replace with your actual image path
                                 alt="Mohd Washid"
                                 className="absolute inset-0 rounded-full w-full h-full object-cover"
                                 initial={{ opacity: 0, rotateY: 180 }}
