@@ -1,0 +1,11 @@
+[
+    {
+        "id": "1",
+        "position": "Flutter Developer",
+        "company": "Webmass Digital OPC Noida",
+        "description": "Developed and maintained mobile applications using Flutter. Focused on creating smooth user experiences and integrating APIs.",
+        "duration": "Aug 2023 - Jul 2024",
+        "technologies": ["Flutter", "Dart", "Firebase"],
+        "certificateUrl": ""
+    }
+]
