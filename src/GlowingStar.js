@@ -7,7 +7,7 @@ const GlowingStar = ({ position }) => {
 
     useFrame(() => {
         if (mesh.current) {
-            mesh.current.rotation.y += 0.01;
+            mesh.current.rotation.y += 0.01
         }
     });
 

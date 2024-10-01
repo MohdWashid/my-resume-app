@@ -811,7 +811,7 @@ const PortfolioContent = () => {
                     {activeTab === 'contact' && <Contact theme={theme} handleSubmit={handleSubmit} />}
                 </main>
                 <footer className="mt-12 py-6 text-center backdrop-blur-sm bg-opacity-30 bg-gray-800 rounded-lg">
-                    <p>&copy; 2024 Your Name. All rights reserved.</p>
+                    <p>&copy; 2024 Mohd Washid. All rights reserved.</p>
                     <p className="mt-2 flex items-center justify-center">
                         <FaGlobe className="mr-2 text-blue-400" />
                         Exploring the digital universe, one line of code at a time.

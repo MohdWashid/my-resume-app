@@ -13,7 +13,7 @@ const SpaceShip = () => {
     return (
         <mesh ref={mesh} position={[5, 0, -5]}>
             <coneGeometry args={[0.5, 1.5, 4]} />
-            <meshStandardMaterial color="black" metalness={0.7} roughness={0.3} />
+            <meshStandardMaterial color="#FDB813" metalness={0.7} roughness={0.3} />
         </mesh>
     );
 };
