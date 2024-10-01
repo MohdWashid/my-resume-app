@@ -277,7 +277,7 @@ const About = ({ theme }) => {
                         title="Get My Resume"
                         content={
                             <motion.a
-                                href="/path-to-your-resume.pdf"
+                                href="/pdf/MohdWashid-resume.pdf"
                                 download
                                 className={`inline-flex items-center px-6 py-3 rounded-full transition-all duration-300 ${theme === 'dark'
                                     ? 'bg-blue-500 hover:bg-blue-600 text-white'
