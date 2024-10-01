@@ -1,38 +1,58 @@
 [
-    {
-      "id": 1,
-      "name": "Portfolio Website",
-      "description": "A personal portfolio website showcasing my skills and projects.",
-      "technologies": ["React", "Tailwind CSS", "Three.js"],
-      "githubUrl": "https://github.com/your-username/portfolio",
-      "liveUrl": "https://your-portfolio.com",
-       "status": "Private"
-    },
-    {
-      "id": 2,
-      "name": "Flutter App",
-      "description": "A mobile application built with Flutter.",
-      "technologies": ["Flutter", "Dart"],
-      "githubUrl": "https://github.com/your-username/flutter-app",
-      "liveUrl": "https://play.google.com/store/apps/details?id=com.example.app",
-       "status": "Private"
-    },
-    {
-      "id": 3,
-      "name": "Weather App",
-      "description": "A weather application built with Flutter, featuring real-time weather data fetched from a public API. Users can view current weather conditions, forecasts, and more.",
-      "technologies": ["Flutter", "Dart", "API Integration"],
-      "githubUrl": "https://github.com/your-username/weather-app",
-      "liveUrl": "https://play.google.com/store/apps/details?id=com.example.weatherapp", "status": "Public"
-    }
-    ,{
-      "id": 4,
-      "name": "Dring Drong Live Streaming App",
-      "description": "A live streaming application developed while working at Webmass Digital OPC. This app allows users to stream live video content, interact with other users, and manage streaming preferences.",
-      "technologies": ["Flutter", "Dart", "Agora", "Streaming API"],
-      "githubUrl": "",
-      "liveUrl": "https://play.google.com/store/apps/details?id=com.example.dringdrong",
-      "status": "Private"
-    }
-  ]
-  
+  {
+    "id": 1,
+    "name": "Dring Drong Live Streaming App",
+    "description": "A live streaming application developed while working at Webmass Digital OPC. This app allows users to stream live video content, interact with other users, and manage streaming preferences.",
+    "technologies": [
+      "Flutter",
+      "Dart",
+      "Agora",
+      "Streaming API"
+    ],
+    "githubUrl": "",
+    "liveUrl": "https://play.google.com/store/apps/DringDong?2324ggg2=com.example.dringdrong",
+    "status": "Private"
+  },
+  {
+    "id": 2,
+    "name": "Portfolio Website",
+    "description": "A personal portfolio website showcasing my skills and projects.",
+    "technologies": [
+      "React",
+      "Tailwind CSS",
+      "Three.js"
+    ],
+    "githubUrl": "https://github.com/MohdWashid/my-resume-app",
+    "liveUrl": "https://mohdwashid.github.io/my-resume-app/",
+    "status": "Public"
+  },
+  {
+    "id": 3,
+    "name": "Weather App",
+    "description": "A weather application built with Flutter, featuring real-time weather data fetched from a public API. Users can view current weather conditions, forecasts, and more.",
+    "technologies": [
+      "Flutter",
+      "Dart",
+      "API Integration"
+    ],
+    "liveUrl": "",
+    "githubUrl": "https://github.com/DEVILGHAZI/weather_ap",
+    "status": "Public"
+  },
+  {
+    "id": 4,
+    "name": "E-commerce Clothing App",
+    "description": "An e-commerce mobile application for clothing. The app features Firebase login with email verification, Firebase Remote Config, and product data fetched from APIs. Users can browse products, add items to their cart, and make purchases.",
+    "technologies": [
+      "Flutter",
+      "Dart",
+      "Firebase Authentication",
+      "Firebase Remote Config",
+      "BLoC Architecture",
+      "Provider"
+    ],
+    "githubUrl": "",
+    "liveUrl": "",
+    "status": "In Progress"
+  }
+]
