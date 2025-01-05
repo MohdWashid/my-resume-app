@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { SiReact, SiFirebase, SiTeepublic, SiNodedotjs, SiGit, SiTailwindcss, SiThreedotjs, SiFlutter, SiDart } from 'react-icons/si'; // Technology icons
+import { FaSun, FaCertificate, FaWhatsapp, FaMoon, FaFileDownload, FaRocket, FaExternalLinkAlt,  FaBars, FaTimes, FaEnvelope, FaLinkedin, FaGithub, FaStar, FaGlobe, FaUserAstronaut, FaInstagram, FaCloud } from 'react-icons/fa';
+import emailjs from '@emailjs/browser';
 
-import { FaSun, FaCertificate,FaWhatsapp, FaMoon, FaFileDownload, FaRocket, FaExternalLinkAlt, FaBars, FaTimes, FaEnvelope, FaLinkedin, FaGithub, FaStar, FaGlobe, FaUserAstronaut, FaInstagram, FaCloud } from 'react-icons/fa';
 import SpaceScene from './SpaceScene';
 import FloatingText from './FloatingText';
 import AnimatedSection from './AnimatedSection';
@@ -212,7 +213,7 @@ const About = ({ theme }) => {
                         <div className="w-full lg:w-1/10 mb-8 lg:mb-0 text-center lg:text-left">
                             <div className="relative w-48 h-48 mx-auto lg:mx-0 lg:w-64 lg:h-64 rounded-full overflow-hidden border-4 border-white shadow-lg mb-6">
                                 <img
-                                   src={process.env.PUBLIC_URL +  "/images/Passport.jpg"}
+                                    src={process.env.PUBLIC_URL + "/images/Passport.jpg"}
                                     alt="Mohd Washid"
                                     className="w-full h-full object-cover"
                                 />
@@ -252,7 +253,7 @@ const About = ({ theme }) => {
                                                 mwashid914@gmail.com
                                             </a>
                                         </div>
-</div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -269,7 +270,7 @@ const About = ({ theme }) => {
                                     <span className="text-blue-300">Hello,</span>
                                 </h1>
                                 <TypewriterEffect words={skills} />
-                                <p className="text-lg leading-relaxed mb-6 text-white"> Driven by a passion for crafting dynamic and intuitive applications, I bring one year of experience in Flutter development to the table. My expertise lies in creating solutions that seamlessly blend creativity with performance, resulting in interactive and engaging digital experiences. I thrive on combining sleek design with robust functionality to deliver applications that not only look great but also perform flawlessly. </p>
+                                <p className="text-lg leading-relaxed mb-6 text-white"> Driven by a passion for crafting dynamic and intuitive applications, I bring Solid experience in Flutter development. My expertise lies in creating solutions that seamlessly blend creativity with performance, resulting in interactive and engaging digital experiences. I thrive on combining sleek design with robust functionality to deliver applications that not only look great but also perform flawlessly. </p>
                             </>
                         }
                     />
@@ -436,6 +437,7 @@ const getBlogIcon = (skill) => {
             return <SiGit className="mr-2 text-orange-400" />;
         case 'React':
             return <SiReact className="mr-2 text-blue-400" />;
+
         default:
             return null;
     }
@@ -450,6 +452,8 @@ const Skills = ({ theme }) => (
                     {[
                         'Flutter',
                         'Dart',
+                        'C',
+                        'C++',
                         'Firebase',
                         'UI & UX',
                         'Git',
@@ -539,111 +543,194 @@ const Blog = ({ theme, blogPosts }) => (
 );
 
 
-const Contact = ({ theme, handleSubmit }) => (
+const Contact = ({ theme }) => {
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        message: ''
+    });
+    const [status, setStatus] = useState('');
 
-    <AnimatedSection
-        title="Contact"
-        content={
-            <div>
-                <p className="mb-4">Feel free to reach out to me for any inquiries or opportunities:</p>
-                <form onSubmit={handleSubmit} className="mb-6 space-y-4">
-                    <div>
-                        <label htmlFor="name" className="block mb-2">
-                            Name
-                        </label>
-                        <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            required
-                            className={`w-full p-2 rounded transition-all duration-300 ${theme === 'light'
-                                ? 'bg-gray-700 focus:bg-gray-600 text-white'
-                                : 'bg-white border border-gray-300 focus:border-blue-500 text-gray-900'
-                                }`}
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="email" className="block mb-2">
-                            Email
-                        </label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            required
-                            className={`w-full p-2 rounded transition-all duration-300 ${theme === 'light'
-                                ? 'bg-gray-700 focus:bg-gray-600 text-white'
-                                : 'bg-white border border-gray-300 focus:border-blue-500 text-gray-900'
-                                }`}
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="message" className="block mb-2">
-                            Message
-                        </label>
-                        <textarea
-                            id="message"
-                            name="message"
-                            required
-                            className={`w-full p-2 rounded transition-all duration-300 ${theme === 'light'
-                                ? 'bg-gray-700 focus:bg-gray-600 text-white'
-                                : 'bg-white border border-gray-300 focus:border-blue-500 text-gray-900'
-                                }`}
-                            rows="4"
-                        ></textarea>
-                    </div>
-                    <button
-                        type="submit"
-                        className={`px-6 py-3 rounded-full transition-all duration-300 ${theme === 'light'
-                            ? 'bg-blue-500 hover:bg-blue-600 text-white'
-                            : 'bg-blue-600 hover:bg-blue-700 text-white'
-                            }`}
-                    >
-                        <FaRocket className="inline-block mr-2" /> Send Message
-                    </button>
-                </form>
-                <div className="flex space-x-6 justify-center">
-                    <a
-                        href="mailto:mwashid914@gmail.com"
-                        className={`text-4xl transition-all duration-300 ${theme === 'dark'
-                            ? 'text-blue-400 hover:text-blue-300'
-                            : 'text-blue-600 hover:text-blue-500'
-                            }`}
-                    >
-                        <FaEnvelope />
-                    </a>
-                    <a
-                        href="https://www.linkedin.com/in/mohd-washid-111a9922b"
-                        className={`text-4xl transition-all duration-300 ${theme === 'dark'
-                            ? 'text-blue-400 hover:text-blue-300'
-                            : 'text-blue-600 hover:text-blue-500'
-                            }`}
-                    >
-                        <FaLinkedin />
-                    </a>
-                    <a
-                        href="https://github.com/DEVILGHAZI"
-                        className={`text-4xl transition-all duration-300 ${theme === 'dark'
-                            ? 'text-blue-400 hover:text-blue-300'
-                            : 'text-blue-600 hover:text-blue-500'
-                            }`}
-                    >
-                        <FaGithub />
-                    </a>
-                    <a
-                        href="https://www.instagram.com/ghaziwashid08/"
-                        className={`text-4xl transition-all duration-300 ${theme === 'dark'
-                            ? 'text-blue-400 hover:text-blue-300'
-                            : 'text-blue-600 hover:text-blue-500'
-                            }`}
-                    >
-                        <FaInstagram />
-                    </a>
-                </div>
-            </div>
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    const sendWhatsAppMessage = (data) => {
+        const phoneNumber = '918958618665'; // Formatted phone number without spaces
+        const message = `New Contact Form Submission:\nName: ${data.name}\nEmail: ${data.email}\nMessage: ${data.message}`;
+        const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
+        window.open(whatsappUrl, '_blank');
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setStatus('sending');
+
+        try {
+            // Send email using EmailJS
+            await emailjs.send(
+                'service_9tvyzwk',  // Your EmailJS service ID
+                'template_l2klwwo', // Your EmailJS template ID
+                {
+                    from_name: formData.name,
+                    from_email: formData.email,
+                    message: formData.message+'\n Email: '+formData.email,
+                    to_email: 'mwashid914@gmail.com',
+                },
+                'Alw75CPrvueSSLxxL'   // Your EmailJS public key
+            );
+
+            // Send WhatsApp message
+            // sendWhatsAppMessage(formData);
+
+            setStatus('success');
+            setFormData({ name: '', email: '', message: '' });
+
+            setTimeout(() => setStatus(''), 3000);
+        } catch (error) {
+            console.error('Error sending message:', error);
+            setStatus('error');
+            setTimeout(() => setStatus(''), 3000);
         }
-    />
-);
+    };
+
+    return (
+        <AnimatedSection
+            title="Contact"
+            content={
+                <div>
+                    <p className="mb-4">Feel free to reach out to me for any inquiries or opportunities:</p>
+                    <form onSubmit={handleSubmit} className="mb-6 space-y-4">
+                        <div>
+                            <label htmlFor="name" className="block mb-2">
+                                Name
+                            </label>
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                value={formData.name}
+                                onChange={handleChange}
+                                required
+                                className={`w-full p-2 rounded transition-all duration-300 ${theme === 'light'
+                                        ? 'bg-gray-700 focus:bg-gray-600 text-white'
+                                        : 'bg-white border border-gray-300 focus:border-blue-500 text-gray-900'
+                                    }`}
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="email" className="block mb-2">
+                                Email
+                            </label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                required
+                                className={`w-full p-2 rounded transition-all duration-300 ${theme === 'light'
+                                        ? 'bg-gray-700 focus:bg-gray-600 text-white'
+                                        : 'bg-white border border-gray-300 focus:border-blue-500 text-gray-900'
+                                    }`}
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="message" className="block mb-2">
+                                Message
+                            </label>
+                            <textarea
+                                id="message"
+                                name="message"
+                                value={formData.message}
+                                onChange={handleChange}
+                                required
+                                className={`w-full p-2 rounded transition-all duration-300 ${theme === 'light'
+                                        ? 'bg-gray-700 focus:bg-gray-600 text-white'
+                                        : 'bg-white border border-gray-300 focus:border-blue-500 text-gray-900'
+                                    }`}
+                                rows="4"
+                            ></textarea>
+                        </div>
+                        <button
+                            type="submit"
+                            disabled={status === 'sending'}
+                            className={`px-6 py-3 rounded-full transition-all duration-300 ${theme === 'light'
+                                    ? 'bg-blue-500 hover:bg-blue-600 text-white'
+                                    : 'bg-blue-600 hover:bg-blue-700 text-white'
+                                } ${status === 'sending' ? 'opacity-50 cursor-not-allowed' : ''}`}
+                        >
+                            <FaRocket className="inline-block mr-2" />
+                            {status === 'sending' ? 'Sending...' : 'Send Message'}
+                        </button>
+
+                        {status === 'success' && (
+                            <div className="text-green-500 mt-2">
+                                Message sent successfully!
+                            </div>
+                        )}
+                        {status === 'error' && (
+                            <div className="text-red-500 mt-2">
+                                Error sending message. Please try again.
+                            </div>
+                        )}
+                    </form>
+                    <div className="flex space-x-6 justify-center">
+                        <a
+                            href="mailto:mwashid914@gmail.com"
+                            className={`text-4xl transition-all duration-300 ${theme === 'dark'
+                                    ? 'text-blue-400 hover:text-blue-300'
+                                    : 'text-blue-600 hover:text-blue-500'
+                                }`}
+                        >
+                            <FaEnvelope />
+                        </a>
+                        <a
+                            href="https://api.whatsapp.com/send?phone=918958618665"
+                            className={`text-4xl transition-all duration-300 ${theme === 'dark'
+                                    ? 'text-blue-400 hover:text-blue-300'
+                                    : 'text-blue-600 hover:text-blue-500'
+                                }`}
+                        >
+                            <FaWhatsapp />
+                        </a>
+                        <a
+                            href="https://www.linkedin.com/in/mohd-washid-111a9922b"
+                            className={`text-4xl transition-all duration-300 ${theme === 'dark'
+                                    ? 'text-blue-400 hover:text-blue-300'
+                                    : 'text-blue-600 hover:text-blue-500'
+                                }`}
+                        >
+                            <FaLinkedin />
+                        </a>
+                        <a
+                            href="https://github.com/DEVILGHAZI"
+                            className={`text-4xl transition-all duration-300 ${theme === 'dark'
+                                    ? 'text-blue-400 hover:text-blue-300'
+                                    : 'text-blue-600 hover:text-blue-500'
+                                }`}
+                        >
+                            <FaGithub />
+                        </a>
+                        <a
+                            href="https://www.instagram.com/ghaziwashid08/"
+                            className={`text-4xl transition-all duration-300 ${theme === 'dark'
+                                    ? 'text-blue-400 hover:text-blue-300'
+                                    : 'text-blue-600 hover:text-blue-500'
+                                }`}
+                        >
+                            <FaInstagram />
+                        </a>
+                    </div>
+                </div>
+            }
+        />
+    );
+};
+
 
 const Experience = ({ theme, experiences }) => (
     <AnimatedSection
