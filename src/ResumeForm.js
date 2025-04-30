@@ -437,7 +437,8 @@ const getBlogIcon = (skill) => {
             return <SiGit className="mr-2 text-orange-400" />;
         case 'React':
             return <SiReact className="mr-2 text-blue-400" />;
-
+        case 'Python':
+            return <SiPython className="mr-2 text-blue-400" />;
         default:
             return null;
     }
@@ -453,6 +454,7 @@ const Skills = ({ theme }) => (
                         'Flutter',
                         'Dart',
                         'C',
+                        'Python',
                         'C++',
                         'Firebase',
                         'UI & UX',
