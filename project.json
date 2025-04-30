@@ -1,6 +1,21 @@
 [
   {
-    "id": 1,
+  "id": 1,
+  "name": "WallTime - Automatic Wallpaper Changer",
+  "description": "An Android application that automatically changes wallpapers at regular intervals or based on user settings. It supports high-quality wallpapers, categories, and background services for seamless wallpaper transitions.",
+  "technologies": [
+    "Flutter",
+    "Dart",
+    "WorkManager",
+    "Local Notifications",
+    "REST API Integration"
+  ],
+  "githubUrl": "",
+  "liveUrl": "",
+  "status": "In Progress"
+},
+  {
+    "id": 2,
     "name": "Dring Drong Live Streaming App",
     "description": "A live streaming application developed while working at Webmass Digital OPC. This app allows users to stream live video content, interact with other users, and manage streaming preferences.",
     "technologies": [
@@ -14,7 +29,7 @@
     "status": "Private"
   },
   {
-    "id": 2,
+    "id": 3,
     "name": "Portfolio Website",
     "description": "A personal portfolio website showcasing my skills and projects.",
     "technologies": [
@@ -27,7 +42,7 @@
     "status": "Public"
   },
   {
-    "id": 3,
+    "id": 4,
     "name": "Weather App",
     "description": "A weather application built with Flutter, featuring real-time weather data fetched from a public API. Users can view current weather conditions, forecasts, and more.",
     "technologies": [
@@ -40,7 +55,7 @@
     "status": "Public"
   },
   {
-    "id": 4,
+    "id": 5,
     "name": "E-commerce Clothing App",
     "description": "An e-commerce mobile application for clothing. The app features Firebase login with email verification, Firebase Remote Config, and product data fetched from APIs. Users can browse products, add items to their cart, and make purchases.",
     "technologies": [
