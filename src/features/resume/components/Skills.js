@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import AnimatedSection from '../../../AnimatedSection';
 import { getTechnologyIcon } from '../../../utils/iconUtils';
 import { FaCode, FaMobileAlt, FaServer, FaTools, FaPalette, FaRocket } from 'react-icons/fa';
@@ -173,76 +174,122 @@ const Skills = ({ theme }) => {
         <AnimatedSection
             title="Skills & Expertise"
             content={
-                <div className="space-y-6">
+                <div className="space-y-6 sm:space-y-8">
                     {skillCategories.map((category, index) => {
                         const colorClasses = getColorClasses(category.color, theme);
                         return (
-                            <div
+                            <motion.div
                                 key={index}
-                                className={`group relative overflow-hidden rounded-2xl transition-all duration-500 
-                                transform hover:scale-[1.02] hover:-translate-y-2 ${
-                                    theme === 'dark'
-                                        ? 'bg-gradient-to-br from-gray-800 via-gray-800 to-gray-900 hover:from-gray-700 hover:via-gray-800'
-                                        : 'bg-gradient-to-br from-gray-800 via-gray-800 to-gray-900 hover:from-gray-700 hover:via-gray-800'
-                                } shadow-xl hover:shadow-2xl ${colorClasses.shadow}`}
+                                className={`glassmorphism group relative overflow-hidden rounded-2xl transition-all duration-500 shadow-2xl ${colorClasses.shadow}`}
+                                initial={{ y: 50, opacity: 0 }}
+                                animate={{ y: 0, opacity: 1 }}
+                                transition={{ delay: index * 0.08, duration: 0.6 }}
+                                whileHover={{ y: -8, scale: 1.01 }}
                             >
-                                {/* Decorative gradient top border */}
-                                <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${colorClasses.gradient}`}></div>
+                                {/* Decorative gradient top border - Animated */}
+                                <motion.div 
+                                    className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${colorClasses.gradient}`}
+                                    animate={{
+                                        backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+                                    }}
+                                    transition={{
+                                        duration: 4,
+                                        repeat: Infinity,
+                                        ease: "linear"
+                                    }}
+                                    style={{
+                                        backgroundSize: '200% 100%'
+                                    }}
+                                ></motion.div>
                                 
-                                <div className="p-8">
+                                <div className="p-6 sm:p-8">
                                     {/* Header Section */}
-                                    <div className="flex items-center justify-between mb-6">
-                                        <div className="flex items-center">
-                                            <div className={`${colorClasses.text} mr-4`}>
+                                    <div className="flex items-center justify-between mb-6 gap-4">
+                                        <motion.div 
+                                            className="flex items-center min-w-0"
+                                            initial={{ x: -20, opacity: 0 }}
+                                            animate={{ x: 0, opacity: 1 }}
+                                            transition={{ delay: index * 0.08 + 0.2 }}
+                                        >
+                                            <motion.div 
+                                                className={`${colorClasses.text} mr-3 sm:mr-4`}
+                                                whileHover={{ rotate: 360, scale: 1.2 }}
+                                                transition={{ duration: 0.5 }}
+                                            >
                                                 {category.icon}
-                                            </div>
-                                            <h3 className="text-2xl font-bold text-white">{category.category}</h3>
-                                        </div>
-                                        <div className={`px-4 py-2 rounded-full text-xs font-bold ${colorClasses.bg} ${colorClasses.text} border ${colorClasses.border}`}>
+                                            </motion.div>
+                                            <h3 className="text-lg sm:text-2xl font-bold text-white">{category.category}</h3>
+                                        </motion.div>
+                                        <motion.div 
+                                            className={`glassmorphism-light px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs font-bold ${colorClasses.text} border ${colorClasses.border} shrink-0`}
+                                            initial={{ scale: 0 }}
+                                            animate={{ scale: 1 }}
+                                            transition={{ delay: index * 0.08 + 0.3, type: "spring" }}
+                                            whileHover={{ scale: 1.1 }}
+                                        >
                                             {category.skills.length} Skills
-                                        </div>
+                                        </motion.div>
                                     </div>
 
                                     {/* Skills Grid */}
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                        {category.skills.map((skill) => (
-                                            <div
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-3">
+                                        {category.skills.map((skill, skillIndex) => (
+                                            <motion.div
                                                 key={skill}
-                                                className={`flex items-center px-4 py-3 rounded-lg text-sm font-medium
-                                                transition-all duration-300 ${
-                                                    theme === 'dark'
-                                                        ? 'bg-gray-700/80 hover:bg-gray-600 text-gray-200'
-                                                        : 'bg-gray-700/80 hover:bg-gray-600 text-gray-200'
-                                                } border border-gray-600/50 hover:border-${category.color}-500/50 hover:scale-105`}
+                                                className={`glassmorphism-light flex items-center px-3 sm:px-4 py-2 sm:py-3 rounded-lg text-xs sm:text-sm font-medium text-gray-200 border border-gray-600/50 hover:scale-105 cursor-default`}
+                                                initial={{ scale: 0, opacity: 0 }}
+                                                animate={{ scale: 1, opacity: 1 }}
+                                                transition={{ 
+                                                    delay: index * 0.08 + 0.4 + skillIndex * 0.03,
+                                                    type: "spring"
+                                                }}
+                                                whileHover={{ 
+                                                    y: -3,
+                                                    borderColor: `rgba(${colorClasses.color === 'blue' ? '59, 130, 246' : '168, 85, 247'}, 0.5)`
+                                                }}
                                             >
                                                 {getTechnologyIcon(skill)}
                                                 <span className="ml-2">{skill}</span>
-                                            </div>
+                                            </motion.div>
                                         ))}
                                     </div>
                                 </div>
 
                                 {/* Hover Effect Border */}
-                                <div className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 
-                                transition-opacity duration-500 pointer-events-none ring-2 ${colorClasses.border}`}></div>
-                            </div>
+                                <motion.div 
+                                    className={`absolute inset-0 rounded-2xl pointer-events-none ring-2 ring-transparent group-hover:${colorClasses.border}`}
+                                    transition={{ duration: 0.3 }}
+                                ></motion.div>
+                            </motion.div>
                         );
                     })}
 
                     {/* Summary Card */}
-                    <div className={`mt-8 p-8 rounded-2xl text-center ${
-                        theme === 'dark' 
-                            ? 'bg-gradient-to-r from-blue-900/40 via-purple-900/40 to-pink-900/40 border-2 border-blue-700/30' 
-                            : 'bg-gradient-to-r from-blue-800/40 via-purple-800/40 to-pink-800/40 border-2 border-blue-600/30'
-                    } shadow-xl`}>
-                        <h4 className="text-xl font-bold text-white mb-2">
+                    <motion.div 
+                        className="glassmorphism mt-8 p-6 sm:p-8 rounded-2xl text-center border-2 border-blue-700/30 shadow-2xl glow-blue"
+                        initial={{ y: 50, opacity: 0, scale: 0.9 }}
+                        animate={{ y: 0, opacity: 1, scale: 1 }}
+                        transition={{ delay: skillCategories.length * 0.08 + 0.5, duration: 0.6 }}
+                        whileHover={{ scale: 1.02, y: -5 }}
+                    >
+                        <motion.h4 
+                            className="text-lg sm:text-xl font-bold text-white mb-2"
+                            animate={{ 
+                                backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+                            }}
+                            transition={{
+                                duration: 3,
+                                repeat: Infinity,
+                                ease: "linear"
+                            }}
+                        >
                             🚀 Complete Mobile App Development Stack
-                        </h4>
-                        <p className={`text-sm ${theme === 'dark' ? 'text-gray-300' : 'text-gray-200'}`}>
+                        </motion.h4>
+                        <p className="text-sm sm:text-base text-gray-300">
                             From UI/UX to deployment, payment integration to real-time features - 
                             I build production-ready mobile applications end-to-end
                         </p>
-                    </div>
+                    </motion.div>
                 </div>
             }
         />

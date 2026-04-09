@@ -1,129 +1,147 @@
 import React from 'react';
-import AnimatedSection from '../../../AnimatedSection';
-import { FaCertificate, FaExternalLinkAlt, FaBriefcase, FaCalendarAlt } from 'react-icons/fa';
+import { motion } from 'framer-motion';
+import { FaCertificate, FaExternalLinkAlt } from 'react-icons/fa';
 import { getTechnologyIcon } from '../../../utils/iconUtils';
 
 const Experience = ({ theme, experiences }) => (
-    <AnimatedSection
-        title="Professional Experience"
-        content={
-            <div className="space-y-6">
-                {experiences.map((exp, index) => (
-                    <div
-                        key={exp.id}
-                        className={`group relative overflow-hidden rounded-2xl transition-all duration-500 
-                        transform hover:scale-[1.02] hover:-translate-y-2 ${
-                            theme === 'dark'
-                                ? 'bg-gradient-to-br from-gray-800 via-gray-800 to-gray-900 hover:from-gray-700 hover:via-gray-800 hover:to-blue-900/40'
-                                : 'bg-gradient-to-br from-gray-800 via-gray-800 to-gray-900 hover:from-gray-700 hover:via-gray-800 hover:to-blue-800/40'
-                        } shadow-xl hover:shadow-2xl ${
-                            theme === 'dark' ? 'hover:shadow-blue-500/20' : 'hover:shadow-blue-400/20'
-                        }`}
-                    >
-                        {/* Decorative gradient overlay */}
-                        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
-                        
-                        <div className="p-8">
-                            {/* Header Section */}
-                            <div className="flex items-start justify-between mb-4">
-                                <div className="flex-1">
-                                    <div className="flex items-center mb-2">
-                                        <FaBriefcase className="text-blue-400 mr-3 text-xl" />
-                                        <h3 className="text-2xl font-bold text-white">{exp.position}</h3>
-                                    </div>
-                                    <p className="text-blue-300 text-lg font-semibold mb-2">{exp.company}</p>
-                                    <div className="flex items-center text-gray-400 text-sm">
-                                        <FaCalendarAlt className="mr-2" />
-                                        <span>{exp.duration}</span>
-                                    </div>
-                                </div>
-                                <div className={`px-4 py-2 rounded-full text-xs font-bold ${
-                                    theme === 'dark' 
-                                        ? 'bg-blue-900/50 text-blue-300 border border-blue-700/50' 
-                                        : 'bg-blue-800/50 text-blue-200 border border-blue-600/50'
-                                }`}>
-                                    #{index + 1}
-                                </div>
-                            </div>
+    <div className="space-y-8">
+        {experiences.map((exp, index) => (
+            <motion.div
+                key={exp.id}
+                initial={{ opacity: 0, x: index % 2 === 0 ? -100 : 100 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.02, rotate: index % 2 === 0 ? 1 : -1 }}
+                className={`border-8 border-black bg-gradient-to-br ${
+                    index % 2 === 0 ? 'from-orange-600 to-yellow-600' : 'from-blue-600 to-cyan-600'
+                } p-8 transform ${index % 2 === 0 ? '-rotate-1' : 'rotate-1'}`}
+                style={{ boxShadow: '12px 12px 0px rgba(0,0,0,0.8)' }}
+            >
+                {/* Mission Badge */}
+                <div className="absolute -top-6 -right-6 w-20 h-20 bg-yellow-400 border-4 border-black rounded-full flex items-center justify-center transform -rotate-12"
+                     style={{ boxShadow: '5px 5px 0px rgba(0,0,0,0.8)' }}>
+                    <span className="text-4xl font-black text-black">
+                        #{index + 1}
+                    </span>
+                </div>
 
-                            {/* Description */}
-                            <p className="text-gray-300 leading-relaxed mb-6 pl-8 border-l-2 border-blue-500/50">
-                                {exp.description}
-                            </p>
+                {/* Halftone pattern */}
+                <div className="absolute inset-0 opacity-10 pointer-events-none" style={{
+                    backgroundImage: 'radial-gradient(circle, rgba(0,0,0,0.5) 1px, transparent 1px)',
+                    backgroundSize: '12px 12px'
+                }} />
 
-                            {/* Technologies */}
-                            <div className="mb-6">
-                                <h4 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">
-                                    Technologies Used
-                                </h4>
-                                <div className="flex flex-wrap gap-3">
-                                    {exp.technologies.map((tech) => (
-                                        <span
-                                            key={tech}
-                                            className={`flex items-center px-4 py-2 rounded-lg text-sm font-medium
-                                            transition-all duration-300 ${
-                                                theme === 'dark'
-                                                    ? 'bg-gray-700/80 hover:bg-gray-600 text-gray-200'
-                                                    : 'bg-gray-700/80 hover:bg-gray-600 text-gray-200'
-                                            } border border-gray-600/50 hover:border-blue-500/50`}
-                                        >
-                                            {getTechnologyIcon(tech)}
-                                            <span className="ml-1">{tech}</span>
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Action Buttons */}
-                            <div className="flex flex-wrap gap-3 pt-4 border-t border-gray-700/50">
-                                {exp.certificateUrl && (
-                                    <a
-                                        href={exp.certificateUrl}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className={`inline-flex items-center px-6 py-3 rounded-xl font-semibold
-                                        transition-all duration-300 transform hover:scale-105 ${
-                                            theme === 'dark'
-                                                ? 'bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white shadow-lg hover:shadow-blue-500/50'
-                                                : 'bg-gradient-to-r from-blue-700 to-blue-600 hover:from-blue-600 hover:to-blue-500 text-white shadow-lg hover:shadow-blue-400/50'
-                                        }`}
-                                    >
-                                        <FaCertificate className="mr-2" /> 
-                                        View Certificate
-                                    </a>
-                                )}
-
-                                {exp.detailsUrl && (
-                                    <a
-                                        href={exp.detailsUrl}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className={`inline-flex items-center px-6 py-3 rounded-xl font-semibold
-                                        transition-all duration-300 transform hover:scale-105 ${
-                                            theme === 'dark'
-                                                ? 'bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-500 hover:to-pink-400 text-white shadow-lg hover:shadow-purple-500/50'
-                                                : 'bg-gradient-to-r from-purple-700 to-pink-600 hover:from-purple-600 hover:to-pink-500 text-white shadow-lg hover:shadow-purple-400/50'
-                                        }`}
-                                    >
-                                        <FaExternalLinkAlt className="mr-2" /> 
-                                        More Details
-                                    </a>
-                                )}
-                            </div>
-                        </div>
-
-                        {/* Hover Effect Border */}
-                        <div className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 
-                        transition-opacity duration-500 pointer-events-none ${
-                            theme === 'dark'
-                                ? 'ring-2 ring-blue-500/30'
-                                : 'ring-2 ring-blue-400/30'
-                        }`}></div>
+                <div className="relative z-10">
+                    {/* Company & Position */}
+                    <div className="bg-white border-4 border-black inline-block px-6 py-3 mb-4 transform -rotate-2"
+                         style={{ boxShadow: '5px 5px 0px rgba(0,0,0,0.8)' }}>
+                        <h3 className="text-3xl md:text-4xl font-black text-black uppercase"
+                            style={{ fontFamily: 'Impact, sans-serif' }}>
+                            {exp.position}
+                        </h3>
                     </div>
-                ))}
-            </div>
-        }
-    />
+
+                    <div className="bg-black border-4 border-white inline-block px-4 py-2 mb-6"
+                         style={{ boxShadow: '4px 4px 0px rgba(255,255,255,0.3)' }}>
+                        <p className="text-xl font-black text-yellow-400" style={{ fontFamily: 'Impact, sans-serif' }}>
+                            📍 {exp.company}
+                        </p>
+                    </div>
+
+                    {/* Duration - Terminal Style */}
+                    <div className="bg-gray-900 border-4 border-green-500 p-4 mb-6 font-mono">
+                        <div className="text-green-400">
+                            <span className="text-yellow-400">$ </span>
+                            <span className="text-blue-400">cat duration.txt</span>
+                            <p className="text-white mt-1">→ {exp.duration}</p>
+                        </div>
+                    </div>
+
+                    {/* Description */}
+                    <div className="bg-white/90 border-4 border-black p-6 mb-6"
+                         style={{ boxShadow: '5px 5px 0px rgba(0,0,0,0.5)' }}>
+                        <p className="text-black text-lg font-bold leading-relaxed">
+                            {exp.description}
+                        </p>
+                    </div>
+
+                    {/* Technologies */}
+                    <div className="mb-6">
+                        <div className="bg-yellow-400 border-4 border-black inline-block px-4 py-2 mb-4"
+                             style={{ boxShadow: '3px 3px 0px rgba(0,0,0,0.8)' }}>
+                            <span className="text-xl font-black text-black"
+                                  style={{ fontFamily: 'Impact, sans-serif' }}>
+                                TECH USED:
+                            </span>
+                        </div>
+                        <div className="flex flex-wrap gap-3">
+                            {exp.technologies.map((tech) => (
+                                <motion.div
+                                    key={tech}
+                                    whileHover={{ scale: 1.1, rotate: 5 }}
+                                    className="bg-black border-3 border-white px-4 py-2 flex items-center gap-2"
+                                    style={{ boxShadow: '3px 3px 0px rgba(255, 255, 255, 0.4)' }}
+                                >
+                                    <span className="text-yellow-400">{getTechnologyIcon(tech)}</span>
+                                    <span className="text-white font-bold text-sm">{tech}</span>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="flex flex-wrap gap-4">
+                        {exp.certificateUrl && (
+                            <motion.a
+                                href={exp.certificateUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                whileHover={{ scale: 1.05, y: -3 }}
+                                whileTap={{ scale: 0.95 }}
+                                className="bg-green-500 border-4 border-black px-6 py-3 font-black text-black text-lg"
+                                style={{ 
+                                    boxShadow: '5px 5px 0px rgba(0,0,0,0.8)',
+                                    fontFamily: 'Impact, sans-serif'
+                                }}
+                            >
+                                <FaCertificate className="inline mr-2" />
+                                CERTIFICATE
+                            </motion.a>
+                        )}
+
+                        {exp.detailsUrl && (
+                            <motion.a
+                                href={exp.detailsUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                whileHover={{ scale: 1.05, y: -3 }}
+                                whileTap={{ scale: 0.95 }}
+                                className="bg-blue-500 border-4 border-black px-6 py-3 font-black text-white text-lg"
+                                style={{ 
+                                    boxShadow: '5px 5px 0px rgba(0,0,0,0.8)',
+                                    fontFamily: 'Impact, sans-serif'
+                                }}
+                            >
+                                <FaExternalLinkAlt className="inline mr-2" />
+                                DETAILS
+                            </motion.a>
+                        )}
+                    </div>
+                </div>
+
+                {/* Action lines decoration */}
+                <div className="absolute bottom-4 left-4 opacity-30">
+                    {[...Array(5)].map((_, i) => (
+                        <div key={i} 
+                             className="bg-black h-1 mb-1"
+                             style={{
+                                 width: `${60 - i * 10}px`
+                             }} />
+                    ))}
+                </div>
+            </motion.div>
+        ))}
+    </div>
 );
 
 export default Experience;

@@ -220,21 +220,48 @@ const SpaceShip = () => {
   );
 };
 
-const SpaceScene = memo(() => {
+// Camera controller with scroll-based movement
+const ScrollCamera = () => {
+  useFrame(({ camera }) => {
+    const scrollY = window.scrollY;
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollProgress = Math.min(scrollY / maxScroll, 1);
+    
+    // Smooth camera movement based on scroll
+    camera.position.y = 50 + scrollProgress * 30;
+    camera.position.z = 120 - scrollProgress * 40;
+    camera.rotation.x = -scrollProgress * 0.3;
+  });
+  return null;
+};
+
+const SpaceScene = memo(({ theme }) => {
   const [canvasSize, setCanvasSize] = useState({ width: '100vw', height: '100vh' });
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const handleResize = () => {
       setCanvasSize({ width: `${window.innerWidth}px`, height: `${window.innerHeight}px` });
     };
 
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollProgress(Math.min(scrollY / maxScroll, 1));
+    };
+
     handleResize();
+    handleScroll();
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   return (
-    <div style={{ height: '300vh', background: '#000000' }}>
+    <div style={{ height: '100%', background: 'transparent' }}>
       <Canvas
         style={{
           position: 'fixed',
@@ -242,18 +269,19 @@ const SpaceScene = memo(() => {
           left: 0,
           width: canvasSize.width,
           height: canvasSize.height,
+          transition: 'opacity 0.5s',
         }}
         camera={{ position: [0, 50, 120], fov: 60 }}
-        gl={{ antialias: true }}
+        gl={{ antialias: true, alpha: true }}
         shadows
       >
-        <ambientLight intensity={0.3} />
+        <ambientLight intensity={0.4 + scrollProgress * 0.3} />
         <pointLight position={[10, 10, 10]} intensity={1.5} castShadow />
         <spotLight
           position={[20, 30, 10]}
           angle={0.3}
           penumbra={1}
-          intensity={2}
+          intensity={2 + scrollProgress}
           castShadow
           shadow-mapSize-width={1024}
           shadow-mapSize-height={1024}
@@ -278,7 +306,8 @@ const SpaceScene = memo(() => {
           <Comet />
         </Suspense>
         <Stars radius={300} depth={60} count={20000} factor={7} saturation={0} fade speed={1} />
-        <OrbitControls enableZoom={true} enablePan={true} />
+        <ScrollCamera />
+        <OrbitControls enableZoom={true} enablePan={true} enableRotate={true} />
       </Canvas>
     </div>
   );

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import AnimatedSection from '../../../AnimatedSection';
+import { motion } from 'framer-motion';
 import { FaEnvelope, FaGithub, FaInstagram, FaLinkedin, FaRocket, FaWhatsapp, FaUser, FaPaperPlane, FaCheckCircle, FaExclamationCircle } from 'react-icons/fa';
-import { sendEmail } from '../../../services/contactService';
 
 const Contact = ({ theme }) => {
     const [formData, setFormData] = useState({
@@ -90,34 +89,42 @@ const Contact = ({ theme }) => {
     ];
 
     return (
-        <AnimatedSection
-            title="Get In Touch"
-            content={
-                <div className="space-y-8">
-                    {/* Contact Form Card */}
-                    <div
-                        className={`group relative overflow-hidden rounded-2xl transition-all duration-500 ${theme === 'dark'
-                                ? 'bg-gradient-to-br from-gray-800 via-gray-800 to-gray-900'
-                                : 'bg-gradient-to-br from-gray-800 via-gray-800 to-gray-900'
-                            } shadow-xl p-8`}
+        <div className="space-y-8">
+                    {/* Contact Form Card - Comic Style */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 50 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="border-8 border-black bg-gradient-to-br from-purple-600 to-blue-600 p-8 transform rotate-1"
+                        style={{ boxShadow: '12px 12px 0px rgba(0,0,0,0.8)' }}
                     >
-                        {/* Decorative gradient top border */}
-                        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
+                        {/* Halftone pattern */}
+                        <div className="absolute inset-0 opacity-10 pointer-events-none" style={{
+                            backgroundImage: 'radial-gradient(circle, rgba(0,0,0,0.5) 1px, transparent 1px)',
+                            backgroundSize: '12px 12px'
+                        }} />
 
-                        <div className="mb-6">
-                            <h3 className="text-xl font-semibold text-white mb-2 flex items-center">
-                                <FaPaperPlane className="text-blue-400 mr-3" />
-                                Send Me a Message
-                            </h3>
-                            <p className="text-gray-400">Feel free to reach out for any inquiries or opportunities</p>
+                        <div className="relative z-10 mb-6">
+                            <div className="bg-yellow-400 border-4 border-black inline-block px-6 py-3 mb-4 transform -rotate-2"
+                                 style={{ boxShadow: '5px 5px 0px rgba(0,0,0,0.8)' }}>
+                                <h3 className="text-3xl font-black text-black flex items-center"
+                                    style={{ fontFamily: 'Impact, sans-serif' }}>
+                                    <FaPaperPlane className="mr-3" />
+                                    SEND MESSAGE!
+                                </h3>
+                            </div>
+                            <p className="text-2xl font-bold text-white"
+                               style={{ fontFamily: 'Impact, sans-serif', textShadow: '2px 2px 0px #000' }}>
+                                LET'S TEAM UP!
+                            </p>
                         </div>
 
-                        <form onSubmit={handleSubmit} className="space-y-5">
+                        <form onSubmit={handleSubmit} className="relative z-10 space-y-5">
                             {/* Name Input */}
                             <div className="space-y-2">
-                                <label htmlFor="name" className="block text-sm font-semibold text-gray-300 flex items-center">
-                                    <FaUser className="mr-2 text-blue-400" />
-                                    Name
+                                <label htmlFor="name" className="block text-xl font-black text-white flex items-center"
+                                       style={{ fontFamily: 'Impact, sans-serif', textShadow: '2px 2px 0px #000' }}>
+                                    <FaUser className="mr-2 text-yellow-400" />
+                                    YOUR NAME:
                                 </label>
                                 <input
                                     type="text"
@@ -127,19 +134,17 @@ const Contact = ({ theme }) => {
                                     onChange={handleChange}
                                     required
                                     placeholder="Enter your name"
-                                    className={`w-full px-4 py-3 rounded-xl transition-all duration-300 border-2 
-                                    focus:outline-none focus:ring-2 focus:ring-blue-500 ${theme === 'dark'
-                                            ? 'bg-gray-700 border-gray-600 hover:border-gray-500 text-white placeholder-gray-400'
-                                            : 'bg-gray-700 border-gray-600 hover:border-gray-500 text-white placeholder-gray-400'
-                                        }`}
+                                    className="w-full px-4 py-3 border-4 border-black font-bold text-black placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-yellow-400"
+                                    style={{ boxShadow: '4px 4px 0px rgba(0,0,0,0.8)' }}
                                 />
                             </div>
 
                             {/* Email Input */}
                             <div className="space-y-2">
-                                <label htmlFor="email" className="block text-sm font-semibold text-gray-300 flex items-center">
-                                    <FaEnvelope className="mr-2 text-blue-400" />
-                                    Email
+                                <label htmlFor="email" className="block text-xl font-black text-white flex items-center"
+                                       style={{ fontFamily: 'Impact, sans-serif', textShadow: '2px 2px 0px #000' }}>
+                                    <FaEnvelope className="mr-2 text-yellow-400" />
+                                    YOUR EMAIL:
                                 </label>
                                 <input
                                     type="email"
@@ -149,19 +154,17 @@ const Contact = ({ theme }) => {
                                     onChange={handleChange}
                                     required
                                     placeholder="your.email@example.com"
-                                    className={`w-full px-4 py-3 rounded-xl transition-all duration-300 border-2 
-                                    focus:outline-none focus:ring-2 focus:ring-blue-500 ${theme === 'dark'
-                                            ? 'bg-gray-700 border-gray-600 hover:border-gray-500 text-white placeholder-gray-400'
-                                            : 'bg-gray-700 border-gray-600 hover:border-gray-500 text-white placeholder-gray-400'
-                                        }`}
+                                    className="w-full px-4 py-3 border-4 border-black font-bold text-black placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-yellow-400"
+                                    style={{ boxShadow: '4px 4px 0px rgba(0,0,0,0.8)' }}
                                 />
                             </div>
 
                             {/* Message Input */}
                             <div className="space-y-2">
-                                <label htmlFor="message" className="block text-sm font-semibold text-gray-300 flex items-center">
-                                    <FaPaperPlane className="mr-2 text-blue-400" />
-                                    Message
+                                <label htmlFor="message" className="block text-xl font-black text-white flex items-center"
+                                       style={{ fontFamily: 'Impact, sans-serif', textShadow: '2px 2px 0px #000' }}>
+                                    <FaPaperPlane className="mr-2 text-yellow-400" />
+                                    YOUR MESSAGE:
                                 </label>
                                 <textarea
                                     id="message"
@@ -171,100 +174,120 @@ const Contact = ({ theme }) => {
                                     required
                                     placeholder="Write your message here..."
                                     rows="5"
-                                    className={`w-full px-4 py-3 rounded-xl transition-all duration-300 border-2 
-                                    focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none ${theme === 'dark'
-                                            ? 'bg-gray-700 border-gray-600 hover:border-gray-500 text-white placeholder-gray-400'
-                                            : 'bg-gray-700 border-gray-600 hover:border-gray-500 text-white placeholder-gray-400'
-                                        }`}
+                                    className="w-full px-4 py-3 border-4 border-black font-bold text-black placeholder-gray-500 resize-none focus:outline-none focus:ring-4 focus:ring-yellow-400"
+                                    style={{ boxShadow: '4px 4px 0px rgba(0,0,0,0.8)' }}
                                 ></textarea>
                             </div>
 
                             {/* Submit Button */}
-                            <button
+                            <motion.button
                                 type="submit"
                                 disabled={status === 'sending'}
-                                className={`w-full px-8 py-4 rounded-xl font-bold text-lg
-                                transition-all duration-300 transform hover:scale-105 flex items-center justify-center ${theme === 'dark'
-                                        ? 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white shadow-lg hover:shadow-blue-500/50'
-                                        : 'bg-gradient-to-r from-blue-700 to-purple-700 hover:from-blue-600 hover:to-purple-600 text-white shadow-lg hover:shadow-blue-400/50'
-                                    } ${status === 'sending' ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                whileHover={{ scale: 1.05, y: -3 }}
+                                whileTap={{ scale: 0.95 }}
+                                className={`w-full px-8 py-4 border-4 border-black font-black text-2xl flex items-center justify-center
+                                ${status === 'sending' ? 'opacity-50 cursor-not-allowed bg-gray-400' : 'bg-yellow-400 text-black'}`}
+                                style={{ 
+                                    boxShadow: '6px 6px 0px rgba(0,0,0,0.8)',
+                                    fontFamily: 'Impact, sans-serif'
+                                }}
                             >
                                 <FaRocket className="mr-2" />
-                                {status === 'sending' ? 'Sending...' : 'Send Message'}
-                            </button>
+                                {status === 'sending' ? 'SENDING...' : 'SEND NOW!'}
+                            </motion.button>
 
                             {/* Status Messages */}
                             {status === 'success' && (
-                                <div className="flex items-center justify-center p-4 bg-green-900/30 border border-green-500/50 rounded-xl text-green-400">
-                                    <FaCheckCircle className="mr-2 text-xl" />
-                                    <span className="font-semibold">Message sent successfully!</span>
-                                </div>
+                                <motion.div
+                                    initial={{ scale: 0 }}
+                                    animate={{ scale: 1 }}
+                                    className="flex items-center justify-center p-4 bg-green-500 border-4 border-black text-black font-black"
+                                    style={{ boxShadow: '5px 5px 0px rgba(0,0,0,0.8)', fontFamily: 'Impact, sans-serif' }}
+                                >
+                                    <FaCheckCircle className="mr-2 text-2xl" />
+                                    <span className="text-xl">SUCCESS! MESSAGE SENT!</span>
+                                </motion.div>
                             )}
                             {status === 'error' && (
-                                <div className="flex items-center justify-center p-4 bg-red-900/30 border border-red-500/50 rounded-xl text-red-400">
-                                    <FaExclamationCircle className="mr-2 text-xl" />
-                                    <span className="font-semibold">Error sending message. Please try again.</span>
-                                </div>
+                                <motion.div
+                                    initial={{ scale: 0 }}
+                                    animate={{ scale: 1 }}
+                                    className="flex items-center justify-center p-4 bg-red-500 border-4 border-black text-white font-black"
+                                    style={{ boxShadow: '5px 5px 0px rgba(0,0,0,0.8)', fontFamily: 'Impact, sans-serif' }}
+                                >
+                                    <FaExclamationCircle className="mr-2 text-2xl" />
+                                    <span className="text-xl">ERROR! TRY AGAIN!</span>
+                                </motion.div>
                             )}
                         </form>
-                    </div>
+                    </motion.div>
 
-                    {/* Social Links Card */}
-                    <div
-                        className={`group relative overflow-hidden rounded-2xl transition-all duration-500 ${theme === 'dark'
-                                ? 'bg-gradient-to-br from-gray-800 via-gray-800 to-gray-900'
-                                : 'bg-gradient-to-br from-gray-800 via-gray-800 to-gray-900'
-                            } shadow-xl p-8`}
+                    {/* Social Links - Comic Style */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 50 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.3 }}
+                        className="border-8 border-black bg-gradient-to-br from-red-600 to-orange-600 p-8 transform -rotate-1"
+                        style={{ boxShadow: '12px 12px 0px rgba(0,0,0,0.8)' }}
                     >
-                        {/* Decorative gradient top border */}
-                        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500"></div>
+                        <div className="relative z-10">
+                            <div className="bg-yellow-400 border-4 border-black inline-block px-8 py-4 mb-6 transform rotate-2"
+                                 style={{ boxShadow: '5px 5px 0px rgba(0,0,0,0.8)' }}>
+                                <h3 className="text-4xl font-black text-black text-center"
+                                    style={{ fontFamily: 'Impact, sans-serif' }}>
+                                    FIND ME ON:
+                                </h3>
+                            </div>
 
-                        <div className="mb-6">
-                            <h3 className="text-xl font-semibold text-white text-center mb-2">
-                                Connect With Me
-                            </h3>
-                            <p className="text-gray-400 text-center">Find me on these platforms</p>
+                            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+                                {socialLinks.map((link, index) => (
+                                    <motion.a
+                                        key={link.name}
+                                        href={link.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        whileHover={{ scale: 1.1, rotate: 5, y: -5 }}
+                                        whileTap={{ scale: 0.95 }}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ delay: index * 0.1 }}
+                                        className="flex flex-col items-center justify-center p-6 bg-white border-4 border-black"
+                                        style={{ boxShadow: '5px 5px 0px rgba(0,0,0,0.8)' }}
+                                    >
+                                        <div className="text-5xl mb-2 text-black">
+                                            {link.icon}
+                                        </div>
+                                        <span className="text-sm font-black text-black"
+                                              style={{ fontFamily: 'Impact, sans-serif' }}>
+                                            {link.name}
+                                        </span>
+                                    </motion.a>
+                                ))}
+                            </div>
                         </div>
+                    </motion.div>
 
-                        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-                            {socialLinks.map((link) => (
-                                <a
-                                    key={link.name}
-                                    href={link.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className={`group/item flex flex-col items-center justify-center p-6 rounded-xl
-                                    transition-all duration-300 transform hover:scale-110 hover:-translate-y-2
-                                    bg-gray-700/50 hover:bg-gradient-to-r hover:${link.gradient}
-                                    border border-gray-600/50 hover:border-transparent shadow-lg hover:shadow-xl`}
-                                >
-                                    <div className="text-4xl mb-2 text-gray-300 group-hover/item:text-white transition-colors duration-300">
-                                        {link.icon}
-                                    </div>
-                                    <span className="text-sm font-semibold text-gray-400 group-hover/item:text-white transition-colors duration-300">
-                                        {link.name}
-                                    </span>
-                                </a>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Call to Action */}
-                    <div className={`p-6 rounded-2xl text-center ${theme === 'dark'
-                            ? 'bg-gradient-to-r from-blue-900/40 via-purple-900/40 to-pink-900/40 border-2 border-blue-700/30'
-                            : 'bg-gradient-to-r from-blue-800/40 via-purple-800/40 to-pink-800/40 border-2 border-blue-600/30'
-                        } shadow-xl`}>
-                        <h4 className="text-lg font-bold text-white mb-2">
-                            💼 Open to Opportunities
+                    {/* Call to Action - Comic Style */}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.5 }}
+                        className="bg-gradient-to-r from-yellow-400 to-orange-400 border-8 border-black p-8 text-center transform rotate-1"
+                        style={{ boxShadow: '10px 10px 0px rgba(0,0,0,0.8)' }}
+                    >
+                        <h4 className="text-4xl font-black text-black mb-4"
+                            style={{ 
+                                fontFamily: 'Impact, sans-serif',
+                                textShadow: '3px 3px 0px rgba(255,255,255,0.5)'
+                            }}>
+                            💼 READY FOR ACTION!
                         </h4>
-                        <p className={`text-sm ${theme === 'dark' ? 'text-gray-300' : 'text-gray-200'}`}>
-                            I'm always interested in hearing about new projects and opportunities.
-                            Let's build something amazing together!
+                        <p className="text-xl font-bold text-black">
+                            Looking for a HERO to join your team? <br />
+                            Let's create something LEGENDARY together!
                         </p>
-                    </div>
+                    </motion.div>
                 </div>
-            }
-        />
     );
 };
 
